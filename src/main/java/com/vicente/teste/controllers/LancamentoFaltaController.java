@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +44,7 @@ public class LancamentoFaltaController {
 		}
 	}
 	
-	public ResponseEntity<?> save(@RequestBody LancamentoFalta entity) throws Exception {
+	public ResponseEntity<?> save(@Valid @RequestBody LancamentoFalta entity) throws Exception {
 		try {
 			return ResponseEntity.ok(service.save(entity));
 		} catch (Exception e) {
