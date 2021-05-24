@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import com.vicente.teste.services.FrequenciaService;
 
 import javassist.NotFoundException;
 
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping("/frequencias")
 public class FrequenciaController {
@@ -31,6 +33,17 @@ public class FrequenciaController {
 	@GetMapping
 	public ResponseEntity<List<Frequencia>> findAll() {
 		return ResponseEntity.ok(service.findAll());
+	}
+	
+	@GetMapping("/aluno/{id}")
+	public ResponseEntity<?> findByAluno(@PathVariable int id) {
+		try {
+			return ResponseEntity.ok(service.findByAluno(id));
+		} catch (NotFoundException e) {
+			Map<String, String> errors = new HashMap<>();
+			errors.put("mensagem", e.getMessage());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
+		}
 	}
 	
 	@GetMapping("/{id}")

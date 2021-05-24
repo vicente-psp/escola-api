@@ -1,5 +1,6 @@
 package com.vicente.teste.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,5 +23,7 @@ public interface FrequenciaRepository extends JpaRepository<Frequencia, Integer>
 		   "FROM   Frequencia tb " +
 		   "WHERE  tb.aluno = :aluno AND tb.presenca = TRUE")
 	Optional<Integer> countPresencaByAluno(@Param("aluno") Aluno aluno);
+	
+	List<Frequencia> findByAluno(Aluno aluno);
 	
 }

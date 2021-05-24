@@ -15,6 +15,7 @@ import javassist.NotFoundException;
 public class FrequenciaService {
 
 	@Autowired FrequenciaRepository repository;
+	@Autowired AlunoService alunoService;
 	
 	public Frequencia findById(int id) throws NotFoundException {
 		return repository
@@ -24,6 +25,11 @@ public class FrequenciaService {
 	
 	public List<Frequencia> findAll() {
 		return repository.findAll();
+	}
+	
+	public List<Frequencia> findByAluno(int id) throws NotFoundException {
+		Aluno aluno = alunoService.findById(id);
+		return repository.findByAluno(aluno);
 	}
 	
 	public Frequencia save(Frequencia entity) throws Exception {
