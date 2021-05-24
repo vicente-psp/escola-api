@@ -37,9 +37,8 @@ public class LancamentoFaltaController {
 		try {
 			return ResponseEntity.ok(service.findById(id));
 		} catch (NotFoundException e) {
-			Map<String, String> errors = new HashMap() {{
-				put("mensagem", e.getMessage());
-			}};
+			Map<String, String> errors = new HashMap<>();
+			errors.put("mensagem", e.getMessage());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
 		}
 	}
@@ -48,9 +47,8 @@ public class LancamentoFaltaController {
 		try {
 			return ResponseEntity.ok(service.save(entity));
 		} catch (Exception e) {
-			Map<String, String> errors = new HashMap() {{
-				put("mensagem", e.getMessage());
-			}};
+			Map<String, String> errors = new HashMap<>();
+			errors.put("mensagem", e.getMessage());
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
 		}
 	}
@@ -61,9 +59,8 @@ public class LancamentoFaltaController {
 			service.deleteById(id);
 			return ResponseEntity.status(HttpStatus.OK).build();
 		} catch (NotFoundException e) {
-			Map<String, String> errors = new HashMap() {{
-				put("mensagem", e.getMessage());
-			}};
+			Map<String, String> errors = new HashMap<>();
+			errors.put("mensagem", e.getMessage());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
 		}
 	}

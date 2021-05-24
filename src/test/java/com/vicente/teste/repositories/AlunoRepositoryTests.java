@@ -10,6 +10,7 @@ import com.vicente.teste.models.Aluno;
 import com.vicente.teste.models.Avaliacao;
 import com.vicente.teste.models.AvaliacaoPeso;
 import com.vicente.teste.models.LancamentoFalta;
+import com.vicente.teste.models.dto.SituacaoDto;
 import com.vicente.teste.models.enums.AnoLetivo;
 import com.vicente.teste.models.enums.Situacao;
 import com.vicente.teste.services.AlunoService;
@@ -31,7 +32,7 @@ public class AlunoRepositoryTests {
 	private AvaliacaoPeso avaliacaoPeso = AvaliacaoPeso.builder().id(1).build();
 	private AnoLetivo anoLetivo = AnoLetivo.PRIMEIRO_BIMESTRE;
 	
-//	@Test
+	@Test
 	public void findByIdTest() throws NotFoundException {
 		final int id = 1;
 		Aluno aluno = repository.findById(id)
@@ -81,9 +82,9 @@ public class AlunoRepositoryTests {
 			.build();
 		lancamentoFaltaService.save(lancamentoFalta);
 		
-		Situacao situacao = alunoService.situacaoFinalAluno(aluno);
+		SituacaoDto situacaoDto = alunoService.situacaoFinal(aluno.getId());
 		
-		assertThat(situacao).isEqualTo(Situacao.APROVADO);
+		assertThat(situacaoDto.getSituacao()).isEqualTo(Situacao.APROVADO);
 	}
 	
 }

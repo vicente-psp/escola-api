@@ -41,10 +41,6 @@ public class AvaliacaoService {
 		repository.deleteById(id);
 	}
 	
-	public float sumNotaByAlunoAndBimestre(Aluno aluno, AnoLetivo anoLetivo) {
-		return repository.sumNotaByAlunoAndAnoLetivo(aluno, anoLetivo).orElse(0.0f);
-	}
-	
 	public float sumNotaComPesoByAluno(Aluno aluno) {
 		return repository.sumNotaComPesoByAluno(aluno).orElse(0.0f);
 	}
@@ -53,12 +49,12 @@ public class AvaliacaoService {
 		return repository.sumPesoByAluno(aluno).orElse(0.0f);
 	}
 	
-	public List<Avaliacao> listByAlunoAndAnoLetivo(Aluno aluno, AnoLetivo anoLetivo) {
-		return repository.listByAlunoAndAnoLetivo(aluno, anoLetivo);
+	public float sumNotaComPesoByAlunoAndAnoLetivo(Aluno aluno, AnoLetivo anoLetivo) {
+		return repository.sumNotaComPesoByAlunoAndAnoLetivo(aluno, anoLetivo).orElse(0.0f);
 	}
 	
-	public List<Avaliacao> listByAluno(Aluno aluno) {
-		return repository.listByAluno(aluno);
+	public float sumPesoByAlunoAndAnoLetivo(Aluno aluno, AnoLetivo anoLetivo) {
+		return repository.sumPesoByAlunoAndAnoLetivo(aluno, anoLetivo).orElse(0.0f);
 	}
 	
 }

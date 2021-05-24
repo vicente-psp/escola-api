@@ -33,9 +33,8 @@ public class AvaliacaoPesoController {
 		try {
 			return ResponseEntity.ok(service.findById(id));
 		} catch (NotFoundException e) {
-			Map<String, String> errors = new HashMap() {{
-				put("mensagem", e.getMessage());
-			}};
+			Map<String, String> errors = new HashMap<>();
+			errors.put("mensagem", e.getMessage());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
 		}
 	}
