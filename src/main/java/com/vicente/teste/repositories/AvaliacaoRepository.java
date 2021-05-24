@@ -14,10 +14,20 @@ import com.vicente.teste.models.enums.AnoLetivo;
 public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Integer> {
 
 	@Query("SELECT SUM(tb.nota) " +
-			   "FROM   Avaliacao tb " +
-			   "WHERE  tb.aluno = :aluno AND tb.anoLetivo = :anoLetivo")
-		Optional<Float> sumNotaByAlunoAndAnoLetivo(
-				@Param("aluno") Aluno aluno, @Param("anoLetivo") AnoLetivo anoLetivo);
+		   "FROM   Avaliacao tb " +
+		   "WHERE  tb.aluno = :aluno AND tb.anoLetivo = :anoLetivo")
+	Optional<Float> sumNotaByAlunoAndAnoLetivo(
+			@Param("aluno") Aluno aluno, @Param("anoLetivo") AnoLetivo anoLetivo);
+	
+	@Query("SELECT SUM(tb.nota * tb.peso) " +
+		   "FROM   Avaliacao tb " +
+		   "WHERE  tb.aluno = :aluno")
+	Optional<Float> sumNotaComPesoByAluno(@Param("aluno") Aluno aluno);
+	
+	@Query("SELECT SUM(tb.peso) " +
+			"FROM   Avaliacao tb " +
+			"WHERE  tb.aluno = :aluno")
+	Optional<Float> sumPesoByAluno(@Param("aluno") Aluno aluno);
 	
 	@Query("SELECT  tb " +
 			"FROM   Avaliacao tb " +

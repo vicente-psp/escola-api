@@ -50,4 +50,8 @@ public class LancamentoFaltaService {
 		return repository.listByAluno(aluno);
 	}
 	
+	public int sumQuantidadeFaltaByAluno(Aluno aluno) {
+		return repository.sumQuantidadeFaltaByAluno(aluno).orElse(0);
+	}
+	
 }

@@ -45,6 +45,14 @@ public class AvaliacaoService {
 		return repository.sumNotaByAlunoAndAnoLetivo(aluno, anoLetivo).orElse(0.0f);
 	}
 	
+	public float sumNotaComPesoByAluno(Aluno aluno) {
+		return repository.sumNotaComPesoByAluno(aluno).orElse(0.0f);
+	}
+	
+	public float sumPesoByAluno(Aluno aluno) {
+		return repository.sumPesoByAluno(aluno).orElse(0.0f);
+	}
+	
 	public List<Avaliacao> listByAlunoAndAnoLetivo(Aluno aluno, AnoLetivo anoLetivo) {
 		return repository.listByAlunoAndAnoLetivo(aluno, anoLetivo);
 	}
