@@ -1,6 +1,7 @@
 package com.vicente.teste.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,18 @@ public class AlunoService {
 	}
 	
 	public List<Aluno> findAll() {
-		return repository.findAll();
+		return repository.findAll()
+				.stream()
+				.map(obj -> {
+					try {
+						SituacaoDto situacaoDto = situacaoFinal(obj.getId());
+						obj.setSituacao(situacaoDto);
+					} catch (NotFoundException e) {
+						e.printStackTrace();
+					}
+					return obj;
+				})
+				.collect(Collectors.toList());
 	}
 	
 	public SituacaoDto situacaoFinal(int id) throws NotFoundException {

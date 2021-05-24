@@ -5,8 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.vicente.teste.models.dto.SituacaoDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,5 +38,8 @@ public class Aluno {
 	
 	@Size(min = 3, max = 20, message = "Matrícula deve ter entre {min} e {max} caracteres")
 	private String matricula;
+	
+	@Transient
+	private SituacaoDto situacao;
 
 }
