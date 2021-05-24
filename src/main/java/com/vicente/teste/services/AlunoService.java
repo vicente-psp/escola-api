@@ -50,11 +50,20 @@ public class AlunoService {
 		
 		float mediaFinal = (media1 + media2 + media3 + media4) / 4f;
 		
-		int somaFaltas = lancamentoFaltaService.sumQuantidadeFaltaByAluno(aluno);
+		int presencas = lancamentoFaltaService.countPresencaByAluno(aluno);
 		
-		float percentualPresenca = 100f - ((somaFaltas / 40f) * 100f);
+		float percentualPresenca = (presencas / 40f) * 100f;
 		
-		SituacaoDto situacaoDto = SituacaoDto.builder().aluno(id).build();
+		SituacaoDto situacaoDto =
+			SituacaoDto.builder()
+				.aluno(id)
+				.media1(media1)
+				.media2(media2)
+				.media3(media3)
+				.media4(media4)
+				.mediaFinal(mediaFinal)
+				.percentualPresencas(percentualPresenca)
+			.build();
 		
 		if (mediaFinal >= 6f && percentualPresenca >= 75f) {
 			situacaoDto.setSituacao(Situacao.APROVADO);
