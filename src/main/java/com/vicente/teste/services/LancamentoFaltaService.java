@@ -41,7 +41,7 @@ public class LancamentoFaltaService {
 	}
 	
 	private boolean isValidQuantidadeFaltas(LancamentoFalta entity) {
-		int totalFaltas = repository.sumQuantidadeFaltaByAlunoAndBimestre(entity.getAluno(), entity.getAnoLetivo()).orElse(0);
+		int totalFaltas = repository.sumQuantidadeFaltaByAlunoAndAnoLetivo(entity.getAluno(), entity.getAnoLetivo()).orElse(0);
 		return entity.getQuantidade() + totalFaltas <= 40;
 	}
 	

@@ -58,7 +58,7 @@ public class LancamentoFaltaRepositoryTests {
 	@Test
 	@Order(2)
 	public void sumQuantidadeFaltaByAlunoAndBimestre() throws NotFoundException {
-		Integer soma = repository.sumQuantidadeFaltaByAlunoAndBimestre(aluno, anoLetivo).orElse(0);
+		Integer soma = repository.sumQuantidadeFaltaByAlunoAndAnoLetivo(aluno, anoLetivo).orElse(0);
 		
 		assertThat(soma).isEqualTo(39);
 	}

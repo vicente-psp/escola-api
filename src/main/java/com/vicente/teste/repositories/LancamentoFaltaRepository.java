@@ -15,7 +15,7 @@ public interface LancamentoFaltaRepository extends JpaRepository<LancamentoFalta
 	@Query("SELECT SUM(tb.quantidade) " +
 		   "FROM   LancamentoFalta tb " +
 		   "WHERE  tb.aluno = :aluno AND tb.anoLetivo = :anoLetivo")
-	Optional<Integer> sumQuantidadeFaltaByAlunoAndBimestre(
+	Optional<Integer> sumQuantidadeFaltaByAlunoAndAnoLetivo(
 			@Param("aluno") Aluno aluno, @Param("anoLetivo") AnoLetivo anoLetivo);
 	
 }
