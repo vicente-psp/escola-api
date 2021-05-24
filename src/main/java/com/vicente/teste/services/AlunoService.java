@@ -18,7 +18,7 @@ public class AlunoService {
 
 	@Autowired AlunoRepository repository;
 	@Autowired AvaliacaoService avaliacaoService;
-	@Autowired LancamentoFaltaService lancamentoFaltaService;
+	@Autowired FrequenciaService lancamentoFaltaService;
 	
 	public Aluno findById(int id) throws NotFoundException {
 		return repository

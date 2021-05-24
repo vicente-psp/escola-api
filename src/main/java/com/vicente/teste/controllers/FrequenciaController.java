@@ -16,19 +16,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vicente.teste.models.LancamentoFalta;
-import com.vicente.teste.services.LancamentoFaltaService;
+import com.vicente.teste.models.Frequencia;
+import com.vicente.teste.services.FrequenciaService;
 
 import javassist.NotFoundException;
 
 @RestController
-@RequestMapping("/lancamento-faltas")
-public class LancamentoFaltaController {
+@RequestMapping("/frequencias")
+public class FrequenciaController {
 
-	@Autowired LancamentoFaltaService service;
+	@Autowired FrequenciaService service;
 	
 	@GetMapping
-	public ResponseEntity<List<LancamentoFalta>> findAll() {
+	public ResponseEntity<List<Frequencia>> findAll() {
 		return ResponseEntity.ok(service.findAll());
 	}
 	
@@ -43,7 +43,7 @@ public class LancamentoFaltaController {
 		}
 	}
 	
-	public ResponseEntity<?> save(@Valid @RequestBody LancamentoFalta entity) throws Exception {
+	public ResponseEntity<?> save(@Valid @RequestBody Frequencia entity) throws Exception {
 		try {
 			return ResponseEntity.ok(service.save(entity));
 		} catch (Exception e) {

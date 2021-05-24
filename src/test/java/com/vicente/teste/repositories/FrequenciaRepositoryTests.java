@@ -12,16 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.vicente.teste.models.Aluno;
-import com.vicente.teste.models.LancamentoFalta;
+import com.vicente.teste.models.Frequencia;
 import com.vicente.teste.models.enums.AnoLetivo;
 
 import javassist.NotFoundException;
 
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)
-public class LancamentoFaltaRepositoryTests {
+public class FrequenciaRepositoryTests {
 	
-	@Autowired LancamentoFaltaRepository repository;
+	@Autowired FrequenciaRepository repository;
 	
 	private Aluno aluno = Aluno.builder().id(1).build();
 	private AnoLetivo anoLetivo = AnoLetivo.PRIMEIRO_BIMESTRE;
@@ -29,28 +29,28 @@ public class LancamentoFaltaRepositoryTests {
 	@Test
 	@Order(1)
 	public void save() {
-		LancamentoFalta lancamentoFalta1 = LancamentoFalta.builder()
+		Frequencia lancamentoFalta1 = Frequencia.builder()
 					.aluno(aluno)
 					.anoLetivo(anoLetivo)
-					.quantidade(15)
+					.presenca(false)
 				.build();
 		repository.save(lancamentoFalta1);
 		
-		LancamentoFalta lancamentoFalta2 = LancamentoFalta.builder()
+		Frequencia lancamentoFalta2 = Frequencia.builder()
 					.aluno(aluno)
 					.anoLetivo(anoLetivo)
-					.quantidade(15)
+					.presenca(false)
 				.build();
 		repository.save(lancamentoFalta2);
 		
-		LancamentoFalta lancamentoFalta3 = LancamentoFalta.builder()
+		Frequencia lancamentoFalta3 = Frequencia.builder()
 					.aluno(aluno)
 					.anoLetivo(anoLetivo)
-					.quantidade(9)
+					.presenca(false)
 				.build();
 		repository.save(lancamentoFalta3);
 		
-		List<LancamentoFalta> lista = repository.findAll();
+		List<Frequencia> lista = repository.findAll();
 		
 		assertThat(lista.size()).isEqualTo(3);
 	}
@@ -58,16 +58,16 @@ public class LancamentoFaltaRepositoryTests {
 	@Test
 	@Order(2)
 	public void sumQuantidadeFaltaByAlunoAndBimestre() throws NotFoundException {
-		Integer soma = repository.sumQuantidadeFaltaByAlunoAndAnoLetivo(aluno, anoLetivo).orElse(0);
+		Integer total = repository.countLancamentosByAlunoAndAnoLetivo(aluno, anoLetivo).orElse(0);
 		
-		assertThat(soma).isEqualTo(39);
+		assertThat(total).isEqualTo(39);
 	}
 	
 	@Test
 	@Order(3)
 	public void delete() throws NotFoundException {
 		repository.deleteAll();
-		List<LancamentoFalta> lista = repository.findAll();
+		List<Frequencia> lista = repository.findAll();
 		
 		assertThat(lista.size()).isEqualTo(0);
 	}

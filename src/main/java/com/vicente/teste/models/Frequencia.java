@@ -26,24 +26,24 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-@SequenceGenerator(name = "lancamento_falta_seq", sequenceName = "lancamento_falta_seq", initialValue = 1, allocationSize = 1)
-public class LancamentoFalta {
+@SequenceGenerator(name = "frequencia_seq", sequenceName = "frequencia_seq", initialValue = 1, allocationSize = 1)
+public class Frequencia {
 	
 	@Id
 	@EqualsAndHashCode.Include
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lancamento_falta_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "frequencia_seq")
 	private Integer id;
 	
 	@Enumerated(EnumType.STRING)
-    @NotNull(message = "Ano letivo do lançamento da falta é obrigatório")
+    @NotNull(message = "Ano letivo da frequência é obrigatório")
 	private AnoLetivo anoLetivo;
 	
 	@ManyToOne
 	@JoinColumn(name = "aluno_id")
-	@NotNull(message = "Aluno do lançamento da falta é obrigatório")
+	@NotNull(message = "Aluno da frequência é obrigatório")
 	private Aluno aluno;
 	
-	@NotNull(message = "Quantidade do lançamento da falta é obrigatório")
-	private Integer quantidade;
+	@NotNull(message = "Presença é obrigatório")
+	private Boolean presenca;
 
 }

@@ -6,28 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vicente.teste.models.Aluno;
-import com.vicente.teste.models.LancamentoFalta;
-import com.vicente.teste.repositories.LancamentoFaltaRepository;
+import com.vicente.teste.models.Frequencia;
+import com.vicente.teste.repositories.FrequenciaRepository;
 
 import javassist.NotFoundException;
 
 @Service
-public class LancamentoFaltaService {
+public class FrequenciaService {
 
-	@Autowired LancamentoFaltaRepository repository;
+	@Autowired FrequenciaRepository repository;
 	
-	public LancamentoFalta findById(int id) throws NotFoundException {
+	public Frequencia findById(int id) throws NotFoundException {
 		return repository
 				.findById(id)
-				.orElseThrow(() -> new NotFoundException("Aluno com id " + id + " não foi localizado"));
+				.orElseThrow(() -> new NotFoundException("Frequência com id " + id + " não foi localizado"));
 	}
 	
-	public List<LancamentoFalta> findAll() {
+	public List<Frequencia> findAll() {
 		return repository.findAll();
 	}
 	
-	public LancamentoFalta save(LancamentoFalta entity) throws Exception {
-		if (!isValidQuantidadeFaltas(entity)) {
+	public Frequencia save(Frequencia entity) throws Exception {
+		if (!isValidPresenca(entity)) {
 			throw new Exception(
 				"Quantidade de faltas do aluno id " + entity.getAluno().getId() + 
 				" no ano letivo " + entity.getAnoLetivo() + " não pode ultrapassar 40 faltas"
@@ -41,12 +41,12 @@ public class LancamentoFaltaService {
 		repository.deleteById(id);
 	}
 	
-	private boolean isValidQuantidadeFaltas(LancamentoFalta entity) {
-		int totalFaltas = repository.sumQuantidadeFaltaByAlunoAndAnoLetivo(entity.getAluno(), entity.getAnoLetivo()).orElse(0);
-		return entity.getQuantidade() + totalFaltas <= 40;
+	private boolean isValidPresenca(Frequencia entity) {
+		int total = repository.countLancamentosByAlunoAndAnoLetivo(entity.getAluno(), entity.getAnoLetivo()).orElse(0);
+		return total < 40;
 	}
 	
-	public List<LancamentoFalta> listByAluno(Aluno aluno) {
+	public List<Frequencia> listByAluno(Aluno aluno) {
 		return repository.listByAluno(aluno);
 	}
 	

@@ -8,25 +8,25 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.vicente.teste.models.Aluno;
-import com.vicente.teste.models.LancamentoFalta;
+import com.vicente.teste.models.Frequencia;
 import com.vicente.teste.models.enums.AnoLetivo;
 
-public interface LancamentoFaltaRepository extends JpaRepository<LancamentoFalta, Integer> {
+public interface FrequenciaRepository extends JpaRepository<Frequencia, Integer> {
 	
-	@Query("SELECT SUM(tb.quantidade) " +
-		   "FROM   LancamentoFalta tb " +
+	@Query("SELECT COUNT(tb.id) " +
+		   "FROM   Frequencia tb " +
 		   "WHERE  tb.aluno = :aluno AND tb.anoLetivo = :anoLetivo")
-	Optional<Integer> sumQuantidadeFaltaByAlunoAndAnoLetivo(
+	Optional<Integer> countLancamentosByAlunoAndAnoLetivo(
 			@Param("aluno") Aluno aluno, @Param("anoLetivo") AnoLetivo anoLetivo);
 	
-	@Query("SELECT SUM(tb.quantidade) " +
-			"FROM   LancamentoFalta tb " +
-			"WHERE  tb.aluno = :aluno")
+	@Query("SELECT COUNT(tb.id) " +
+		   "FROM   Frequencia tb " +
+		   "WHERE  tb.aluno = :aluno AND tb.presenca = FALSE")
 	Optional<Integer> sumQuantidadeFaltaByAluno(@Param("aluno") Aluno aluno);
 	
 	@Query("SELECT tb " +
-		   "FROM   LancamentoFalta tb " +
+		   "FROM   Frequencia tb " +
 		   "WHERE  tb.aluno = :aluno")
-	List<LancamentoFalta> listByAluno(@Param("aluno") Aluno aluno);
+	List<Frequencia> listByAluno(@Param("aluno") Aluno aluno);
 	
 }

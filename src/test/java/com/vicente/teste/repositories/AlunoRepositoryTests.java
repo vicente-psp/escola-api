@@ -9,13 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.vicente.teste.models.Aluno;
 import com.vicente.teste.models.Avaliacao;
 import com.vicente.teste.models.AvaliacaoPeso;
-import com.vicente.teste.models.LancamentoFalta;
+import com.vicente.teste.models.Frequencia;
 import com.vicente.teste.models.dto.SituacaoDto;
 import com.vicente.teste.models.enums.AnoLetivo;
 import com.vicente.teste.models.enums.Situacao;
 import com.vicente.teste.services.AlunoService;
 import com.vicente.teste.services.AvaliacaoService;
-import com.vicente.teste.services.LancamentoFaltaService;
+import com.vicente.teste.services.FrequenciaService;
 
 import javassist.NotFoundException;
 
@@ -26,7 +26,7 @@ public class AlunoRepositoryTests {
 	
 	@Autowired AlunoService alunoService;
 	@Autowired AvaliacaoService avaliacaoService;
-	@Autowired LancamentoFaltaService lancamentoFaltaService;
+	@Autowired FrequenciaService lancamentoFaltaService;
 	
 	private Aluno aluno = Aluno.builder().id(1).build();
 	private AvaliacaoPeso avaliacaoPeso = AvaliacaoPeso.builder().id(1).build();
@@ -75,10 +75,10 @@ public class AlunoRepositoryTests {
 				.build();
 		avaliacaoService.save(avaliacao4);
 		
-		LancamentoFalta lancamentoFalta = LancamentoFalta.builder()
+		Frequencia lancamentoFalta = Frequencia.builder()
 				.aluno(aluno)
 				.anoLetivo(anoLetivo)
-				.quantidade(9)
+				.presenca(false)
 			.build();
 		lancamentoFaltaService.save(lancamentoFalta);
 		
