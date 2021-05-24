@@ -25,4 +25,9 @@ public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Integer> {
 	List<Avaliacao> listByAlunoAndAnoLetivo(
 			@Param("aluno") Aluno aluno, @Param("anoLetivo") AnoLetivo anoLetivo);
 	
+	@Query("SELECT  tb " +
+			"FROM   Avaliacao tb " +
+			"WHERE  tb.aluno = :aluno")
+	List<Avaliacao> listByAluno(@Param("aluno") Aluno aluno);
+	
 }

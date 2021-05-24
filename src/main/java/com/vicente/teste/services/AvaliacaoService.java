@@ -49,4 +49,8 @@ public class AvaliacaoService {
 		return repository.listByAlunoAndAnoLetivo(aluno, anoLetivo);
 	}
 	
+	public List<Avaliacao> listByAluno(Aluno aluno) {
+		return repository.listByAluno(aluno);
+	}
+	
 }
