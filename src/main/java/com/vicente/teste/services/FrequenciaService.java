@@ -29,8 +29,8 @@ public class FrequenciaService {
 	public Frequencia save(Frequencia entity) throws Exception {
 		if (!isValidPresenca(entity)) {
 			throw new Exception(
-				"Quantidade de faltas do aluno id " + entity.getAluno().getId() + 
-				" no ano letivo " + entity.getAnoLetivo() + " não pode ultrapassar 40 faltas"
+				"Quantidade de frequência do aluno id " + entity.getAluno().getId() + 
+				" no ano letivo " + entity.getAnoLetivo() + " não pode ultrapassar 40"
 			);
 		}
 		return repository.save(entity);
