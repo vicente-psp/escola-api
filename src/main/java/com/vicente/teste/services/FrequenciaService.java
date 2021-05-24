@@ -46,12 +46,8 @@ public class FrequenciaService {
 		return total < 40;
 	}
 	
-	public List<Frequencia> listByAluno(Aluno aluno) {
-		return repository.listByAluno(aluno);
-	}
-	
-	public int sumQuantidadeFaltaByAluno(Aluno aluno) {
-		return repository.sumQuantidadeFaltaByAluno(aluno).orElse(0);
+	public int countPresencaByAluno(Aluno aluno) {
+		return repository.countPresencaByAluno(aluno).orElse(0);
 	}
 	
 }
