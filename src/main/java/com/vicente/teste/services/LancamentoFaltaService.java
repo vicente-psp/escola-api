@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vicente.teste.models.Aluno;
 import com.vicente.teste.models.LancamentoFalta;
 import com.vicente.teste.repositories.LancamentoFaltaRepository;
 
@@ -43,6 +44,10 @@ public class LancamentoFaltaService {
 	private boolean isValidQuantidadeFaltas(LancamentoFalta entity) {
 		int totalFaltas = repository.sumQuantidadeFaltaByAlunoAndAnoLetivo(entity.getAluno(), entity.getAnoLetivo()).orElse(0);
 		return entity.getQuantidade() + totalFaltas <= 40;
+	}
+	
+	public List<LancamentoFalta> listByAluno(Aluno aluno) {
+		return repository.listByAluno(aluno);
 	}
 	
 }

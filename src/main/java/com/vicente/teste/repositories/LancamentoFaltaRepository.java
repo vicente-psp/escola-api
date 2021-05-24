@@ -1,5 +1,6 @@
 package com.vicente.teste.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,5 +18,10 @@ public interface LancamentoFaltaRepository extends JpaRepository<LancamentoFalta
 		   "WHERE  tb.aluno = :aluno AND tb.anoLetivo = :anoLetivo")
 	Optional<Integer> sumQuantidadeFaltaByAlunoAndAnoLetivo(
 			@Param("aluno") Aluno aluno, @Param("anoLetivo") AnoLetivo anoLetivo);
+	
+	@Query("SELECT SUM(tb.quantidade) " +
+			"FROM   LancamentoFalta tb " +
+			"WHERE  tb.aluno = :aluno")
+	List<LancamentoFalta> listByAluno(@Param("aluno") Aluno aluno);
 	
 }
