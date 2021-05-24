@@ -1,4 +1,4 @@
--- criar tabela para lançamentos das faltas do aluno
+-- criar tabela para avaliações do aluno
 
 CREATE SEQUENCE IF NOT EXISTS public.avaliacao_seq START 1;
 
