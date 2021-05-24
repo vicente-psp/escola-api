@@ -66,9 +66,7 @@ public class LancamentoFaltaRepositoryTests {
 	@Test
 	@Order(3)
 	public void delete() throws NotFoundException {
-		repository.deleteById(4);
-		repository.deleteById(5);
-		repository.deleteById(6);
+		repository.deleteAll();
 		List<LancamentoFalta> lista = repository.findAll();
 		
 		assertThat(lista.size()).isEqualTo(0);
