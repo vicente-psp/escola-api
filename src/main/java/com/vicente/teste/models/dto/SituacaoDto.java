@@ -15,6 +15,12 @@ import lombok.Setter;
 public class SituacaoDto {
 
 	private int aluno;
+	private float media1;
+	private float media2;
+	private float media3;
+	private float media4;
+	private float mediaFinal;
+	private float percentualPresencas;
 	private Situacao situacao;
 	
 }
