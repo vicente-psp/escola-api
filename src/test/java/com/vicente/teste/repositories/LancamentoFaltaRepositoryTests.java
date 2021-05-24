@@ -23,27 +23,30 @@ public class LancamentoFaltaRepositoryTests {
 	
 	@Autowired LancamentoFaltaRepository repository;
 	
+	private Aluno aluno = Aluno.builder().id(1).build();
+	private AnoLetivo anoLetivo = AnoLetivo.PRIMEIRO_BIMESTRE;
+	
 	@Test
 	@Order(1)
 	public void save() {
 		LancamentoFalta lancamentoFalta1 = LancamentoFalta.builder()
-					.aluno(Aluno.builder().id(1).build())
-					.anoLetivo(AnoLetivo.PRIMEIRO_BIMESTRE)
+					.aluno(aluno)
+					.anoLetivo(anoLetivo)
 					.quantidade(15)
 				.build();
 		repository.save(lancamentoFalta1);
 		
 		LancamentoFalta lancamentoFalta2 = LancamentoFalta.builder()
-				.aluno(Aluno.builder().id(1).build())
-				.anoLetivo(AnoLetivo.PRIMEIRO_BIMESTRE)
-				.quantidade(15)
+					.aluno(aluno)
+					.anoLetivo(anoLetivo)
+					.quantidade(15)
 				.build();
 		repository.save(lancamentoFalta2);
 		
 		LancamentoFalta lancamentoFalta3 = LancamentoFalta.builder()
-				.aluno(Aluno.builder().id(1).build())
-				.anoLetivo(AnoLetivo.PRIMEIRO_BIMESTRE)
-				.quantidade(9)
+					.aluno(aluno)
+					.anoLetivo(anoLetivo)
+					.quantidade(9)
 				.build();
 		repository.save(lancamentoFalta3);
 		
@@ -55,7 +58,7 @@ public class LancamentoFaltaRepositoryTests {
 	@Test
 	@Order(2)
 	public void sumQuantidadeFaltaByAlunoAndBimestre() throws NotFoundException {
-		Integer soma = repository.sumQuantidadeFaltaByAlunoAndBimestre(Aluno.builder().id(1).build(), AnoLetivo.PRIMEIRO_BIMESTRE);
+		Integer soma = repository.sumQuantidadeFaltaByAlunoAndBimestre(aluno, anoLetivo).orElse(0);
 		
 		assertThat(soma).isEqualTo(39);
 	}
@@ -63,9 +66,9 @@ public class LancamentoFaltaRepositoryTests {
 	@Test
 	@Order(3)
 	public void delete() throws NotFoundException {
-		repository.deleteById(13);
-		repository.deleteById(14);
-		repository.deleteById(15);
+		repository.deleteById(4);
+		repository.deleteById(5);
+		repository.deleteById(6);
 		List<LancamentoFalta> lista = repository.findAll();
 		
 		assertThat(lista.size()).isEqualTo(0);
